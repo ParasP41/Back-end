@@ -1,0 +1,22 @@
+Data Storage
+    aaisa kuch jaha ham saare users kee info store kar sekta hai
+    data--base
+
+types of DB
+    SQL || NO-SQL
+    SQL--data ko ek roop mein rakhana - table
+    NoSQL--{
+        age:25,
+        name:Paras,
+    }
+
+database -> collections ->Document
+CODE
+-------------------------------------------------
+
+
+code                 database
+-------------------------------------------------
+mongoose.connect  ->  database create
+model create      ->  collection create
+create user code  ->  

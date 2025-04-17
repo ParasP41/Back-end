@@ -1,0 +1,8 @@
+form handling and workin with the form
+handle backend process of form and making sure the data coming any front end lib,and framwork and templating engine , we can still handle at the backend
+
+session , cookie
+
+ham kuch bhi data frontend par browser par rakh sekta hai jab bhi aap kuchh bhi request backend par karoge wo fe par saved data automatically backend par chala jaayega
+
+tumne to bhaja that readble text par server koo mila blob which is not directly readble now wea have to handler this thing so we can make that blob readble again

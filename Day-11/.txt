@@ -1,0 +1,26 @@
+Authentication and authorization 
+
+    user ko profile dane sea pehla check karna hota hai kee user hai kon
+    Authentication--to validate that the given user is correct or not
+
+
+    Authorization--to check that the user is authorized to perform the task or not
+    authorized to perform the task which are only allowed to be executed by admin
+
+Cookies and session
+Task:
+1--> how to set the cookie and how to read it with (cookie-parser)
+2--> how to use bcrypt to incript and decript for the password
+3--> what is JWT to to store and get back the data in JWT
+
+Paras@P41
+$2b$10$oLSdncHMmvpuGcIMfWtK0.N4xkG.0vb3EN7R0aFMayod2oFUvmxEu
+
+##bcrypt is a one-way hashing algorithm, not encryption.
+##
+Hashing (bcrypt)    |   Encryption (AES, RSA, etc.)
+--------------------|---------------------------------
+One-way             |   Two-way (encrypt & decrypt)
+Irreversible        |   Reversible
+Used for passwords  |   Used for messages, tokens, etc.
+bcrypt, SHA-256     |   crypto, crypto-js, etc.
