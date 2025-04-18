@@ -1,54 +1,46 @@
+const cookieParser=require('cookie-parser')
 const express = require('express');
-const path = require('path');
+const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken')
 const app = express();
-const userModel = require('./models/user.js')
 
-app.set('view engine', 'ejs');
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, './public')));
+app.use(cookieParser())
 
-app.get('/', (req, res) => {
-    res.render("index");
+app.get('/',(req,res)=>
+{
+    // res.cookie('name','Paras')
+    // bcrypt.genSalt(10,(err,salt)=>
+    // {
+    //     bcrypt.hash("Paras@P41",salt,(err,hash)=>
+    //     {
+    //         console.log(hash)
+    //     })
+    // })
+
+    // bcrypt.compare('Paras@P41','$2b$10$oLSdncHMmvpuGcIMfWtK0.N4xkG.0vb3EN7R0aFMayod2oFUvmxEu',(err,result)=>
+    // {
+    //     console.log(result);
+    // })
+    // res.send("Done 👍");
+
+    let token=jwt.sign({email:"parasvp41@gmail.com"},'secret')
+    res.cookie("token",token)
+    console.log(token)
+    res.send("Send")
+})
+// app.get('/send',(req,res)=>
+// {
+//     // console.log(req.cookies);
+//     res.send("Send Done 👍")
+// })
+
+app.get('/read',(req,res)=>
+{
+    let data=jwt.verify(req.cookies.token,'secret')
+    console.log(data);
+})
+
+app.listen('3000',()=>
+{
+    console.log("App is Running at Port 3000 ⇌")
 });
-
-app.post('/create', async (req, res) => {
-    let { name, email, imgurl } = req.body;
-    await userModel.create({
-        name: name,
-        email: email,
-        imgUrl: imgurl,
-    })
-    res.redirect('/read')
-})
-
-app.get('/read', async (req, res) => {
-    let allUsers = await userModel.find()
-    res.render("read", { users: allUsers });
-})
-
-app.get('/delete/:id', async (req, res) => {
-    let id = req.params.id;
-    await userModel.findByIdAndDelete(id);
-    res.redirect('/read')
-})
-
-app.get('/edit/:id', async (req, res) => {
-    let id = req.params.id;
-    let user = await userModel.findOne({ _id: id })
-    res.render('edit', { user: user })
-})
-
-app.post('/update/:id', async (req, res) => {
-    let id = req.params.id;
-    await userModel.findOneAndUpdate({ _id: id }, {
-        name: req.body.name,
-        email: req.body.email,
-        imgUrl: req.body.imgurl
-    },
-        {
-            new: true
-        })
-    res.redirect('/read')
-})
-app.listen("3000");
