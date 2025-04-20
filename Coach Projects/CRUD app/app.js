@@ -38,7 +38,7 @@ app.get('/edit/:id', async (req, res) => {
     let user = await userModel.findOne({ _id: id })
     res.render('edit', { user: user })
 })
-
+r
 app.post('/update/:id', async (req, res) => {
     let id = req.params.id;
     await userModel.findOneAndUpdate({ _id: id }, {
