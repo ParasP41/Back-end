@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"> <!-- Added 'dark' class here -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // enables dark mode via "class"
+      };
+    </script>
+</head>
+<body class="bg-white dark:bg-zinc-900 min-h-screen">
+    <a  href="/" class="text-white txet-2xl px-14 py-10 block">Back to home--></h1>
+    <div class="flex flex-wrap items-center justify-between gap-10 py-10">
+      <div class="w-80  p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md flex flex-col justify-between overflow-hidden">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 truncate">
+          <%= filename %>
+        </h3>
+        <p class="text-sm text-gray-700 dark:text-gray-300 overflow-y-auto">
+          <%= desc %>
+        </p>
+      </div> 
+    </div>     
+</body>
+</html>

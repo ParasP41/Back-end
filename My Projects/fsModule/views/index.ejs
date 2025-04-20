@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Form - Dark Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+
+  <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">Add New Task</h2>
+
+    <form class="space-y-4" method="post" action="/addtask" >
+      <div>
+        <label for="taskName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Task Name</label>
+        <input type="text" id="taskName" name="taskName" placeholder="Enter task name"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="taskDescription" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+        <textarea id="taskDescription" name="taskDescription" placeholder="Enter task description"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          rows="4"></textarea>
+      </div>
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-300">
+        Add Task
+      </button>
+    </form>
+  </div>
+  <div class="flex flex-wrap item-center justify-between gap-10 p-10">
+    <%if(files.length>0){%>
+        <%files.forEach((val)=>{%>
+              <div class="w-80  p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 truncate"><%=val%></h3>
+                <div class="mt-4 flex justify-between items-center">
+                    <a  href="./read/<%=val%>" class="text-blue-600 dark:text-blue-400 text-sm hover:underline">Read More</a>
+                    <div class="space-x-2">
+                      <a href="./edit/<%=val%>" class="text-yellow-500 hover:text-yellow-600 text-sm">✏️</a>
+                      <a href="./delete/<%=val%>" class="text-red-500 hover:text-red-600 text-sm">🗑️</a>
+                    </div>
+                  </div>
+              </div>
+        <%})%>
+        <%}else{%>
+            <p class="text-gray-600 text-center dark:text-gray-400 text-center">No files exist
+        <%}%>
+  </div>
+
+</body>
+</html>

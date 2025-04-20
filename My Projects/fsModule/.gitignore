@@ -1,0 +1,33 @@
+# Node modules
+/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables file
+.env
+
+# Local build or distribution files
+/dist/
+/build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors files
+.vscode/
+.idea/
+
+# Test output
+/coverage/
+
+# Optional for ignoring directories like tmp or cache
+/tmp/
+/.cache/
+
+# Debugging files (optional)
+.pnp/
+.pnp.js

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // enables dark mode via "class"
+      };
+    </script>
+</head>
+<body>
+  <!-- Overlay -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <!-- Modal -->
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl w-full max-w-lg shadow-lg space-y-6">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Edit Todo</h2>
+
+    <form class="space-y-6">
+      <!-- Previous Info -->
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400">Previous Info</h3>
+        
+        <div>
+          <label class="text-sm text-gray-500 dark:text-gray-400"></label>
+          <input
+            type="text"
+            value="<%=filename%>"
+            readonly
+            class="mt-1 block w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-500 dark:text-gray-400">Old Description</label>
+          <textarea
+            rows="3"
+            readonly
+            class="mt-1 block w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white"
+          ><%=desc%></textarea>
+        </div>
+      </div>
+
+      <!-- New Info -->
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Update Info</h3>
+
+        <div>
+          <label class="text-sm text-gray-700 dark:text-gray-300">New Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter new title"
+            class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white placeholder-gray-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-700 dark:text-gray-300">New Description</label>
+          <textarea
+            name="description"
+            rows="3"
+            placeholder="Enter new description"
+            class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white placeholder-gray-400"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-end gap-3">
+        <a href="/"
+          type="button"
+          class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition"
+        >
+          Go Back
+        </a>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+      
+</body>
+</html>
