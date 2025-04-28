@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,27 +11,59 @@
 <body class="bg-gray-100 min-h-screen">
 
   <!-- Navbar -->
+  <!-- Navbar -->
   <nav class="bg-white shadow-md py-4">
     <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
+
+      <!-- Logo or Title -->
       <h1 class="text-2xl font-bold text-gray-800">My Blog</h1>
+
+      <!-- Profile Image + Logout Button -->
+      <div class="flex items-center space-x-4">
+        <h1>
+          <%=user.username%>
+        </h1>
+        <!-- Profile Image -->
+        <img src="../images/userImage/<%=user.userImage%>" alt="Profile"
+          class="w-10 h-10 rounded-full object-cover border-2 border-blue-500">
+        <!-- Logout Button -->
+        <a href="/logout" type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
+          Log-out
+        </a>
+
+      </div>
+
     </div>
   </nav>
 
+
+  <!-- Create New Post Form -->
   <!-- Create New Post Form -->
   <section class="max-w-6xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Create New Post</h2>
-    <form action="/create" method="POST" class="space-y-6">
+    <form action="/createPost" method="POST" enctype="multipart/form-data" class="space-y-6">
       <div>
         <label class="block mb-2 text-gray-700">Title</label>
-        <input type="text" name="title" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Blog Title">
+        <input type="text" name="title"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          placeholder="Blog Title">
       </div>
       <div>
         <label class="block mb-2 text-gray-700">Content</label>
-        <textarea name="content" rows="5" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Write your blog content..."></textarea>
+        <textarea name="content" rows="5"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          placeholder="Write your blog content..."></textarea>
       </div>
-      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition">Publish</button>
+      <div>
+        <label class="block mb-2 text-gray-700">Upload Image</label>
+        <input type="file" name="postImage" required accept="image/*"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+      </div>
+      <button type="submit"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition">Publish</button>
     </form>
   </section>
+
 
   <!-- Main Content: Sidebar + Posts -->
   <section class="max-w-6xl mx-auto mt-12 p-4 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -58,61 +91,57 @@
     <div class="md:col-span-3 space-y-8">
 
       <!-- Single Blog Post -->
-      <div class="bg-white p-6 rounded-lg shadow-md relative">
-        <!-- Action Buttons -->
-        <div class="absolute top-4 right-4 flex space-x-2">
-          <form action="/edit" method="POST">
-            <button class="text-blue-500 hover:text-blue-700" title="Edit">
-              ✏️
-            </button>
-          </form>
-          <form action="/delete" method="POST">
-            <button class="text-red-500 hover:text-red-700" title="Delete">
-              🗑️
-            </button>
-          </form>
-          <form action="/like" method="POST">
-            <button class="text-pink-500 hover:text-pink-700" title="Like">
-              ❤️
-            </button>
-          </form>
-        </div>
+      <%if(user.post.length>0){%>
+        <%user.post.reverse().forEach((post)=>{%>
+          <div class="bg-white p-6 rounded-lg shadow-md relative">
+            <!-- Action Buttons -->
+            <div class="absolute top-4 right-4 flex space-x-5">
+                <button class="text-blue-500 hover:text-blue-700" title="Edit">✏️ Edit</button>
+                <a href="/delete/<%=post._id%>" class="text-red-500 hover:text-red-700" title="Delete">🗑️ Delete</a>
+              <!-- <form action="/like" method="POST">
+                <button class="text-pink-500 hover:text-pink-700" title="Like">❤️</button>
+              </form> -->
+            </div>
 
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">First Blog Post</h3>
-        <p class="text-gray-600 text-sm mb-4">Posted on April 26, 2025</p>
-        <p class="text-gray-700">Welcome to my blog! This is my very first post. Excited to share everything I learn!</p>
-      </div>
+            <!-- Post Image -->
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-6">
 
-      <!-- Another Blog Post -->
-      <div class="bg-white p-6 rounded-lg shadow-md relative">
-        <div class="absolute top-4 right-4 flex space-x-2">
-          <form action="/edit" method="POST">
-            <button class="text-blue-500 hover:text-blue-700" title="Edit">
-              ✏️
-            </button>
-          </form>
-          <form action="/delete" method="POST">
-            <button class="text-red-500 hover:text-red-700" title="Delete">
-              🗑️
-            </button>
-          </form>
-          <form action="/like" method="POST">
-            <button class="text-pink-500 hover:text-pink-700" title="Like">
-              ❤️
-            </button>
-          </form>
-        </div>
+              <!-- Post Image -->
+              <div class="w-full md:w-1/2">
+                <img src="../images/postImage/<%=post.postImage%>" alt="Post Image"
+                  class="w-full h-64 object-cover rounded-lg">
+              </div>
 
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learning TailwindCSS</h3>
-        <p class="text-gray-600 text-sm mb-4">Posted on April 25, 2025</p>
-        <p class="text-gray-700">Today I explored TailwindCSS! It makes building beautiful designs super fast and easy.</p>
-      </div>
+              <!-- Post Content -->
+              <div class="w-full md:w-1/2">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                  <%=user.name%>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">
+                  <%=post.date%>
+                </p>
+                <p class="text-gray-700">
+                  <%=post.content%>
+                </p>
+              </div>
 
-      <!-- Add more posts here -->
+            </div>
+
+          </div>
+          <%})%>
+            <%}else{%>
+              <h1 class="text-2xl font-semibold text-gray-500 text-center mt-10">
+                No Published task yet
+              </h1>
+              <%}%>
+
+
+                <!-- Add more posts here -->
 
     </div>
 
   </section>
 
 </body>
+
 </html>

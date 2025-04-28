@@ -131,7 +131,7 @@ app.get('/like/:id', isLoggedIn,async (req, res) => {
 
 
 
-app.get('/delete/:id', async (req, res) => {
+app.get('/delete/:id',isLoggedIn, async (req, res) => {
   let id = req.params.id;
   let post = await postModel.findOneAndDelete({ _id: id })
   let user = await userModel.findOne({ _id: post.user });

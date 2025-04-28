@@ -23,9 +23,10 @@ let postSchema=mongoose.Schema({
             ref: 'user'
         }
     ],
-    image:{
+    postImage:{
         type:String,
-        require:true
+        require:true,
+        default:'avatar.png'
     },
 })
 
