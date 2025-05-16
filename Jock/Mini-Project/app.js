@@ -95,34 +95,33 @@ app.get('/logout', (req, res) => {
 
 
 
-app.get('/edit/:id', isLoggedIn,async (req, res) => {
-  let id=req.params.id;
-  let post=await postModel.findOne({_id:id}).populate('user');
-  
+app.get('/edit/:id', isLoggedIn, async (req, res) => {
+  let id = req.params.id;
+  let post = await postModel.findOne({ _id: id }).populate('user');
+
   await post.save();
-  res.render('edit',{post:post});
+  res.render('edit', { post: post });
 })
 
-app.post('/update/:id',isLoggedIn, async (req, res) => {
-  let {content}=req.body;
-  let id=req.params.id;
-  let post=await postModel.findOneAndUpdate(
-    {_id:id},
-    {content:content},
-    {new: true}
+app.post('/update/:id', isLoggedIn, async (req, res) => {
+  let { content } = req.body;
+  let id = req.params.id;
+  let post = await postModel.findOneAndUpdate(
+    { _id: id },
+    { content: content },
+    { new: true }
   )
   res.redirect('/profile')
 });
 
 
-app.get('/like/:id', isLoggedIn,async (req, res) => {
-  let id=req.params.id;
-  let post=await postModel.findOne({_id:id}).populate('user');
-  if(post.likes.indexOf(req.user.userid)===-1)
-  {
+app.get('/like/:id', isLoggedIn, async (req, res) => {
+  let id = req.params.id;
+  let post = await postModel.findOne({ _id: id }).populate('user');
+  if (post.likes.indexOf(req.user.userid) === -1) {
     post.likes.push(req.user.userid)
-  }else{
-    post.likes.splice(post.likes.indexOf(req.user.userid),1)
+  } else {
+    post.likes.splice(post.likes.indexOf(req.user.userid), 1)
   }
   await post.save();
   res.redirect('/profile');
@@ -131,7 +130,7 @@ app.get('/like/:id', isLoggedIn,async (req, res) => {
 
 
 
-app.get('/delete/:id',isLoggedIn, async (req, res) => {
+app.get('/delete/:id', isLoggedIn, async (req, res) => {
   let id = req.params.id;
   let post = await postModel.findOneAndDelete({ _id: id })
   let user = await userModel.findOne({ _id: post.user });
